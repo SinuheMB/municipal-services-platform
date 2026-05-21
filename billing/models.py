@@ -65,3 +65,4 @@ class Payment(models.Model):
 
     def __str__(self):
         return f'Pago {self.amount} - {self.get_method_display()} - {self.invoice}'
+    

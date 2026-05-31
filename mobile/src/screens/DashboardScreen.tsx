@@ -7,14 +7,16 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from 'react-native'
-import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import client from '../api/client'
-import type { RootStackParamList } from '../../App'
+import { useNavigation } from '@react-navigation/native'
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import type { MainTabParamList } from '../../App'
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Dashboard'>
+type Props = BottomTabScreenProps<MainTabParamList, 'Dashboard'>
 
-export default function DashboardScreen({ navigation }: Props) {
+export default function DashboardScreen({ }: Props) {
+  const navigation = useNavigation<any>()
   const [summary, setSummary] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
@@ -27,7 +29,10 @@ export default function DashboardScreen({ navigation }: Props) {
   const handleLogout = async () => {
     await AsyncStorage.removeItem('access_token')
     await AsyncStorage.removeItem('refresh_token')
-    navigation.replace('Login')
+    navigation.getParent()?.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    })
   }
 
   if (loading) return (
@@ -52,12 +57,6 @@ export default function DashboardScreen({ navigation }: Props) {
         <StatCard title="Cobrado este mes" value={`$${summary?.payments?.total_this_month}`} sub="MXN" color="#f3e8ff" />
       </View>
 
-      <TouchableOpacity
-        style={styles.invoicesButton}
-        onPress={() => navigation.navigate('Invoices')}
-      >
-        <Text style={styles.invoicesButtonText}>Ver facturas</Text>
-      </TouchableOpacity>
     </ScrollView>
   )
 }
@@ -130,16 +129,5 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#9ca3af',
     marginTop: 2,
-  },
-  invoicesButton: {
-    backgroundColor: '#1d4ed8',
-    borderRadius: 10,
-    padding: 16,
-    alignItems: 'center',
-  },
-  invoicesButtonText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 15,
   },
 })

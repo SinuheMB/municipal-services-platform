@@ -10,8 +10,12 @@ import {
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import client from '../api/client'
 import type { RootStackParamList } from '../../App'
+import { useNavigation } from '@react-navigation/native'
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import type { MainTabParamList } from '../../App'
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Invoices'>
+
+type Props = BottomTabScreenProps<MainTabParamList, 'Invoices'>
 
 const statusColors: Record<string, string> = {
   pending: '#fef9c3',
@@ -27,9 +31,10 @@ const statusLabels: Record<string, string> = {
   cancelled: 'Cancelada',
 }
 
-export default function InvoicesScreen({ navigation }: Props) {
+export default function InvoicesScreen({ }: Props) {
   const [invoices, setInvoices] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const navigation = useNavigation<any>()
 
   useEffect(() => {
     client.get('/billing/invoices/')

@@ -33,7 +33,7 @@ export default function LoginScreen({ navigation }: Props) {
     })
     await AsyncStorage.setItem('access_token', data.access)
     await AsyncStorage.setItem('refresh_token', data.refresh)
-    navigation.replace('Dashboard')
+    navigation.replace('Main')
     } catch (err: any) {
     console.log('Error status:', err?.response?.status)
     console.log('Error data:', JSON.stringify(err?.response?.data))

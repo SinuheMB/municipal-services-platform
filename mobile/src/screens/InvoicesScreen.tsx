@@ -51,9 +51,6 @@ export default function InvoicesScreen({ }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.back}>← Volver</Text>
-        </TouchableOpacity>
         <Text style={styles.title}>Facturas</Text>
       </View>
 

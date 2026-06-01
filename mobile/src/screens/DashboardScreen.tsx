@@ -54,7 +54,7 @@ export default function DashboardScreen({ }: Props) {
         <StatCard title="Usuarios" value={summary?.users?.total} sub="registrados" color="#dbeafe" />
         <StatCard title="Cuentas activas" value={summary?.services?.active_accounts} sub="servicios" color="#dcfce7" />
         <StatCard title="Facturas pendientes" value={summary?.invoices?.pending} sub="por cobrar" color="#fef9c3" />
-        <StatCard title="Cobrado este mes" value={`$${summary?.payments?.total_this_month}`} sub="MXN" color="#f3e8ff" />
+        <StatCard title="Cobrado este mes" value={`$${summary?.payments?.total_this_month ?? 0}`} sub="MXN" color="#f3e8ff" />
       </View>
 
     </ScrollView>

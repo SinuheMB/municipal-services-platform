@@ -3,7 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // ─── ÚNICA FUENTE DE VERDAD ───────────────────────────────────────────────
 // Cambia solo esta línea cuando cambies de red
-export const API_URL = 'http://192.168.1.15:8000/api'
+// export const API_URL = 'http://192.168.1.15:8000/api'
+export const API_URL = 'https://web-production-24244.up.railway.app/api'
+
 
 const client = axios.create({
   baseURL: API_URL,

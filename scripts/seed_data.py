@@ -1,8 +1,3 @@
-import os
-import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
-django.setup()
-
 from users.models import User
 from services.models import ServiceCategory, Service, ServiceAccount
 from billing.models import Invoice, Payment

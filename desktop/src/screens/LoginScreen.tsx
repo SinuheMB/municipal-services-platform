@@ -19,13 +19,14 @@ export default function LoginScreen() {
         username,
         password
       })
+      console.log('Login exitoso:', data)
       localStorage.setItem('access_token', data.access)
       localStorage.setItem('refresh_token', data.refresh)
-      navigate('/caja')
-    } catch {
-      setError('Usuario o contraseña incorrectos')
-    } finally {
-      setLoading(false)
+      console.log('Token guardado:', localStorage.getItem('access_token'))
+      navigate('/')
+    } catch (err: any) {
+      console.log('Error:', err?.response?.status, err?.response?.data)
+      setError(err?.response?.data?.detail || 'Usuario o contraseña incorrectos')
     }
   }
 

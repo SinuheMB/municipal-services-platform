@@ -1,3 +1,5 @@
+import os
+
 from users.models import User
 from services.models import ServiceCategory, Service, ServiceAccount
 from billing.models import Invoice, Payment
@@ -5,7 +7,7 @@ from datetime import date
 
 u, _ = User.objects.get_or_create(username='admin1', defaults={'email':'admin@municipal.com', 'role':'admin', 'is_superuser':True, 'is_staff':True})
 u.role = 'admin'
-u.set_password('Admin1234!')
+u.set_password(os.getenv('ADMIN_PASSWORD', 'Admin1234!'))
 u.save()
 
 ciudadanos = []

@@ -35,9 +35,6 @@ export default function LoginScreen({ navigation }: Props) {
     await AsyncStorage.setItem('refresh_token', data.refresh)
     navigation.replace('Main')
     } catch (err: any) {
-    console.log('Error status:', err?.response?.status)
-    console.log('Error data:', JSON.stringify(err?.response?.data))
-    console.log('Error message:', err?.message)
     setError(err?.response?.data?.detail || err?.message || 'Error desconocido')
     }
   }

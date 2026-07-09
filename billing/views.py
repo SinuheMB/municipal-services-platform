@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from .models import Invoice, Payment
 from .serializers import InvoiceSerializer, PaymentSerializer, InvoiceStatusSerializer
 from services.views import IsAdminOrOperator
+from .serializers import CitizenSummarySerializer
+
 
 
 class InvoiceListCreateView(generics.ListCreateAPIView):
@@ -69,6 +71,7 @@ class PaymentListView(generics.ListAPIView):
 
 class CitizenInvoiceSummaryView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = CitizenSummarySerializer
 
     def get(self, request):
         invoices = Invoice.objects.filter(

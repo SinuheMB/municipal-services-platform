@@ -47,3 +47,11 @@ class InvoiceStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoice
         fields = ('id', 'status')
+
+
+class CitizenSummarySerializer(serializers.Serializer):
+    total_invoices = serializers.IntegerField()
+    pending_count = serializers.IntegerField()
+    overdue_count = serializers.IntegerField()
+    pending_amount = serializers.FloatField()
+    overdue_amount = serializers.FloatField()

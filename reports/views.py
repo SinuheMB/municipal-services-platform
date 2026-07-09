@@ -8,10 +8,13 @@ from billing.models import Invoice, Payment
 from services.models import ServiceAccount, Service
 from users.models import User
 from services.views import IsAdminOrOperator
+from .serializers import DashboardSummarySerializer, InvoiceReportSerializer, PaymentReportSerializer
+
 
 
 class DashboardSummaryView(APIView):
     permission_classes = [IsAdminOrOperator]
+    serializer_class = DashboardSummarySerializer
 
     def get(self, request):
         today = timezone.now().date()
@@ -56,6 +59,7 @@ class DashboardSummaryView(APIView):
 
 class InvoiceReportView(APIView):
     permission_classes = [IsAdminOrOperator]
+    serializer_class = InvoiceReportSerializer
 
     def get(self, request):
         status_filter = request.query_params.get('status')
@@ -99,6 +103,7 @@ class InvoiceReportView(APIView):
 
 class PaymentReportView(APIView):
     permission_classes = [IsAdminOrOperator]
+    serializer_class = PaymentReportSerializer
 
     def get(self, request):
         date_from = request.query_params.get('date_from')

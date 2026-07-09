@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
 from .serializers import UserSerializer, RegisterSerializer
+from .serializers import LogoutSerializer  # agregar a los imports existentes
+
 
 
 class RegisterView(generics.CreateAPIView):
@@ -33,6 +35,7 @@ class UserListView(generics.ListAPIView):
 
 class LogoutView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = LogoutSerializer
 
     def post(self, request):
         try:

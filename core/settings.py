@@ -161,6 +161,10 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Municipal Services Platform API',
     'DESCRIPTION': 'API para gestión de servicios municipales',
     'VERSION': '1.0.0',
+    'ENUM_NAME_OVERRIDES': {
+        'InvoiceStatusEnum': 'billing.models.Invoice.Status',
+        'ServiceAccountStatusEnum': 'services.models.ServiceAccount.Status',
+    },
 }
 
 SIMPLE_JWT = {

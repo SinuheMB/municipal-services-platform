@@ -40,6 +40,13 @@ All four clients consume the same Django REST API, secured with JWT and role-bas
 └─────────────┘ └────────────┘ └───────────────────┘
 ```
 
+## Downloads
+
+Ready-to-install builds are available in [Releases](https://github.com/SinuheMB/municipal-services-platform/releases):
+
+- **Android APK** — install directly on any Android device, no Expo Go required
+- **Desktop (.deb / .rpm / .AppImage)** — native Linux installers for the cashier/admin app
+
 ---
 
 ## Features

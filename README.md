@@ -85,6 +85,8 @@ cd municipal-services-platform
 python3.12 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+cp .env.example .env
+# edita .env con tus valores locales (base de datos, secret key)
 docker compose up -d          # PostgreSQL
 python manage.py migrate
 python manage.py runserver

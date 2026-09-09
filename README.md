@@ -146,4 +146,4 @@ municipal-services-platform/
 
 Built by [Sinuhé](https://github.com/SinuheMB) — Programmer Analyst with real-world experience in municipal billing systems, now building freelance tech solutions for government and business use cases in Latin America.
 
-Open to freelance and contract work. Reach out via [LinkedIn](www.linkedin.com/in/sinuhe-medel-ba7589206) or [Upwork](#).
+Open to freelance and contract work. Reach out via [LinkedIn](www.linkedin.com/in/sinuhe-medel-ba7589206) or [Upwork](https://www.upwork.com/freelancers/~01967ae81a55740837?mp_source=share).

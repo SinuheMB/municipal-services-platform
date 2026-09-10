@@ -42,4 +42,16 @@ for i, c in enumerate(ciudadanos):
         if created and m < 3:
             Payment.objects.create(invoice=inv, amount=145.00, method='cash', reference=f'PAG-{i+1}{m}')
 
+for c in ciudadanos:
+    c.set_password(os.getenv('CITIZEN_PASSWORD', 'Ciudadano123!'))
+    c.save()
+
+operador, _ = User.objects.get_or_create(
+    username='operador1',
+    defaults={'email': 'operador1@municipal.com', 'role': 'operator'}
+)
+operador.role = 'operator'
+operador.set_password(os.getenv('OPERATOR_PASSWORD', 'Operador123!'))
+operador.save()
+
 print('Datos de demo creados correctamente')

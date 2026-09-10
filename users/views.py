@@ -4,14 +4,18 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
 from .serializers import UserSerializer, RegisterSerializer
-from .serializers import LogoutSerializer  # agregar a los imports existentes
+from .serializers import LogoutSerializer
 
+
+class CanCreateUsers(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.role in ('admin', 'operator')
 
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (CanCreateUsers,)
 
 
 class ProfileView(generics.RetrieveUpdateAPIView):

@@ -16,6 +16,14 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'email', 'password', 'role', 'phone')
 
+    def validate_role(self, value):
+        requester = self.context['request'].user
+        if requester.role == 'admin' and value not in ('admin', 'operator', 'citizen'):
+            raise serializers.ValidationError("Rol no válido.")
+        if requester.role == 'operator' and value not in ('operator', 'citizen'):
+            raise serializers.ValidationError("Operator solo puede crear operator o citizen.")
+        return value
+
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
 

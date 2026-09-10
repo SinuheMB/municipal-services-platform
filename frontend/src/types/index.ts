@@ -98,3 +98,11 @@ export interface AuthTokens {
   access: string
   refresh: string
 }
+
+export interface CreateUserPayload {
+  username: string
+  email: string
+  password: string
+  role: 'admin' | 'operator' | 'citizen'
+  phone: string
+}

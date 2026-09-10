@@ -1,15 +1,21 @@
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 
-const links = [
+const allLinks = [
   { to: '/dashboard', label: 'Dashboard', icon: '📊' },
   { to: '/services', label: 'Servicios', icon: '🔧' },
   { to: '/billing', label: 'Facturación', icon: '🧾' },
   { to: '/reports', label: 'Reportes', icon: '📈' },
+  { to: '/users/create', label: 'Crear Usuario', icon: '👤', roles: ['admin', 'operator'] },
 ]
 
 export default function Sidebar() {
   const { user, logout } = useAuth()
+  const handleLogout = async () => {
+    await logout()
+    window.location.href = '/login'
+  }
+  const links = allLinks.filter((link) => !link.roles || link.roles.includes(user?.role || ''))
 
   return (
     <aside className="w-64 bg-gray-900 text-white flex flex-col h-screen fixed">
@@ -42,7 +48,7 @@ export default function Sidebar() {
 
       <div className="p-4 border-t border-gray-700">
         <button
-          onClick={logout}
+          onClick={handleLogout}
           className="w-full text-left text-sm text-gray-400 hover:text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
         >
           🚪 Cerrar sesión

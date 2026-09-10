@@ -8,6 +8,7 @@ import Services from './pages/services/Services'
 import Billing from './pages/billing/Billing'
 import Reports from './pages/reports/Reports'
 import Layout from './components/layout/Layout'
+import CreateUser from './pages/users/CreateUser'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="services" element={<Services />} />
           <Route path="billing" element={<Billing />} />
           <Route path="reports" element={<Reports />} />
+          <Route path="users/create" element={<CreateUser />} />
         </Route>
       </Routes>
     </BrowserRouter>

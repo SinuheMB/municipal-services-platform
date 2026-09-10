@@ -5,6 +5,7 @@ import { getProfile, logout as logoutApi } from '../api/auth'
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('access_token'))
 
   useEffect(() => {
     const token = localStorage.getItem('access_token')
@@ -14,6 +15,7 @@ export const useAuth = () => {
         .catch(() => {
           localStorage.removeItem('access_token')
           localStorage.removeItem('refresh_token')
+          setIsAuthenticated(false)
         })
         .finally(() => setLoading(false))
     } else {
@@ -23,11 +25,17 @@ export const useAuth = () => {
 
   const logout = async () => {
     const refresh = localStorage.getItem('refresh_token') || ''
-    await logoutApi(refresh)
+    try {
+      await logoutApi(refresh)
+    } catch {
+      // si el backend falla, igual limpiamos la sesión local
+    }
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
     setUser(null)
+    setIsAuthenticated(false)
   }
 
-  const isAuthenticated = !!localStorage.getItem('access_token')
   const isAdmin = user?.role === 'admin'
   const isOperator = user?.role === 'operator' || user?.role === 'admin'
 

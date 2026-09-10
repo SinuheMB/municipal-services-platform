@@ -1,5 +1,6 @@
 import client from './client'
 import type { AuthTokens, User } from '../types'
+import type { CreateUserPayload } from '../types'
 
 export const login = async (username: string, password: string): Promise<AuthTokens> => {
   const { data } = await client.post('/users/login/', { username, password })
@@ -26,4 +27,9 @@ export const logout = async (refresh: string): Promise<void> => {
   await client.post('/users/logout/', { refresh })
   localStorage.removeItem('access_token')
   localStorage.removeItem('refresh_token')
+}
+
+export const createUser = async (payload: CreateUserPayload) => {
+  const { data } = await client.post('/users/create/', payload)
+  return data
 }
